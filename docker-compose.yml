@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  db-peg:
+    container_name: db-peg
+    image: mongo:5
+    restart: always
+    environment:
+      MONGODB_DATABASE: pegGame
+    volumes:
+      - ./data:/data/db
+
+  api-peg-game:
+    depends_on:
+      - db-peg
+    container_name: api-peg-game
+    image: api-peg-game
+    restart: always
+    ports:
+      - 3030:3030
